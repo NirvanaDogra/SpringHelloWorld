@@ -19,6 +19,7 @@ variables:
   containerRegistry: 'ndacrsnd.azurecr.io'
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
+  vmImageName: ubuntu-latest
 
 stages:
   - stage: BuildSpringBoot
