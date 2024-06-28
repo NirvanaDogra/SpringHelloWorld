@@ -21,7 +21,7 @@ variables:
   tag: '$(Build.BuildId)'
 
 stages:
-  - stage: Build Spring Boot
+  - stage: BuildSpringBoot
     displayName: Build Spring Boot
     jobs:
       - job: Build
@@ -40,7 +40,7 @@ stages:
               testResultsFiles: '**/surefire-reports/TEST-*.xml'
               goals: 'package'
 
-  - stage: Build Docker Image
+  - stage: BuildDockerImage
     displayName: Build Docker Image
     jobs:
       - job: Build
