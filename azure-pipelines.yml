@@ -18,7 +18,7 @@ variables:
   imageRepository: 'springhelloworld'
   containerRegistry: 'ndacrsnd.azurecr.io'
   dockerfilePath: '**/Dockerfile'
-  tag: '$(appVersion)'
+  tag: '$(version)'
   vmImageName: ubuntu-latest
 
 stages:
@@ -60,4 +60,3 @@ stages:
               dockerfile: $(dockerfilePath)
               containerRegistry: $(dockerRegistryServiceConnection)
               tags: |
-                $(tag)

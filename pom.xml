@@ -8,10 +8,10 @@
 		<version>3.1.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.eazybytes</groupId>
-	<artifactId>example_20</artifactId>
+	<groupId>com.nirvana</groupId>
+	<artifactId>springhelloworld</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>example_20</name>
+	<name>springhelloworld</name>
 	<packaging>jar</packaging>
 	<description>Eazy School Web Application</description>
 	<properties>
