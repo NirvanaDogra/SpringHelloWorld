@@ -40,6 +40,9 @@ stages:
               publishJUnitResults: true
               testResultsFiles: '**/surefire-reports/TEST-*.xml'
               goals: 'package'
+          - script: ls
+            displayName: 'Check Docker Version'
+
 
   - stage: BuildDockerImage
     displayName: Build Docker Image
