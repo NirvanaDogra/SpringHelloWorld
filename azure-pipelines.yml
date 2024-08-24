@@ -1,12 +1,9 @@
-# Maven
-# Build your Java project and run tests with Apache Maven.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
 trigger:
-- main
+  - main
+
 resources:
   - repo: self
+
 pool:
   vmImage: ubuntu-latest
 
@@ -23,10 +20,10 @@ stages:
   - stage: Build
     displayName: Build
     jobs:
-      - job: Build Spring
+      - job: BuildSpring
         displayName: Build Spring
         pool:
-            vmImage: ubuntu-latest
+          vmImage: ubuntu-latest
         steps:
           - task: Maven@3
             displayName: 'Building Spring'
@@ -39,21 +36,23 @@ stages:
               publishJUnitResults: true
               testResultsFiles: '**/surefire-reports/TEST-*.xml'
               goals: 'package'
-          - script: echo spring build completed mode...
+          - script: echo "Spring build completed."
+            displayName: 'Spring Build Completed'
 
-      - job: Build Docker Image
+      - job: BuildDockerImage
         displayName: Build Docker Image
         pool:
           vmImage: ubuntu-latest
         steps:
           - task: Docker@2
-            displayName: Build and push an image to container registry
+            displayName: 'Build and push an image to container registry'
             inputs:
               command: buildAndPush
               repository: $(imageRepository)
               dockerfile: $(dockerfilePath)
               containerRegistry: $(dockerRegistryServiceConnection)
               tags: $(tag)
+
   - stage: Deploying
     displayName: Deploying to EC2
     jobs:
@@ -62,4 +61,5 @@ stages:
         pool:
           vmImage: $(vmImageName)
         steps:
-          -task: Compute@100
+          - script: echo "Deploying to EC2..."
+            displayName: 'Deploy to EC2'
