@@ -15,7 +15,6 @@ variables:
   dockerfilePath: '**/Dockerfile'
   tag: 'latest'
   vmImageName: ubuntu-latest
-  JAR_FILE: ./target/*.jar
 
 stages:
   - stage: Build
@@ -53,8 +52,7 @@ stages:
               dockerfile: $(dockerfilePath)
               containerRegistry: $(dockerRegistryServiceConnection)
               tags: $(tag)
-              buildArguments: |
-                JAR_FILE=$(JAR_FILE)
+
 
   - stage: Deploying
     displayName: Deploying to EC2

@@ -3,5 +3,5 @@ WORKDIR /app
 
 ARG JAR_FILE=*.jar
 CMD ["echo", "${JAR_FILE}"]
-COPY ${JAR_FILE} app.jar
+COPY /target/*.jar app.jar
 CMD ["java", "-jar", "app.jar"]
