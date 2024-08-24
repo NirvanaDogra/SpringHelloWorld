@@ -5,10 +5,8 @@
 
 trigger:
 - main
-
 resources:
   - repo: self
-
 pool:
   vmImage: ubuntu-latest
 
@@ -22,15 +20,16 @@ variables:
   vmImageName: ubuntu-latest
 
 stages:
-  - stage: BuildSpringBoot
-    displayName: Build Spring Boot
+  - stage: Build
+    displayName: Build
     jobs:
-      - job: Build
-        displayName: Build
+      - job: Build Spring
+        displayName: Build Spring
         pool:
             vmImage: ubuntu-latest
         steps:
           - task: Maven@3
+            displayName: 'Building Spring'
             inputs:
               mavenPomFile: 'pom.xml'
               mavenOptions: '-Xmx3072m'
@@ -40,15 +39,10 @@ stages:
               publishJUnitResults: true
               testResultsFiles: '**/surefire-reports/TEST-*.xml'
               goals: 'package'
-          - script: ls
-            displayName: 'Check Docker Version'
+          - script: echo spring build completed mode...
 
-
-  - stage: BuildDockerImage
-    displayName: Build Docker Image
-    jobs:
-      - job: Build
-        displayName: Build
+      - job: Build Docker Image
+        displayName: Build Docker Image
         pool:
           vmImage: ubuntu-latest
         steps:
@@ -59,4 +53,13 @@ stages:
               repository: $(imageRepository)
               dockerfile: $(dockerfilePath)
               containerRegistry: $(dockerRegistryServiceConnection)
-              tags: |
+              tags: $(tag)
+  - stage: Deploying
+    displayName: Deploying to EC2
+    jobs:
+      - job: DeployEC2
+        displayName: Deploy EC2
+        pool:
+          vmImage: $(vmImageName)
+        steps:
+          -task: Compute@100
