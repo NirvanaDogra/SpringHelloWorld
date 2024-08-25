@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HelloWorldController {
     @RequestMapping(value={"", "/"})
     public ResponseEntity<String> displayHomePage() {
-        return ResponseEntity.ok("Hello World!");
+        return ResponseEntity.ok("Hello World! THis is part update");
     }
 }
