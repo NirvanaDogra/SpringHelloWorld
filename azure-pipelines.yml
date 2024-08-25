@@ -36,8 +36,8 @@ stages:
               publishJUnitResults: true
               testResultsFiles: '**/surefire-reports/TEST-*.xml'
               goals: 'package'
-          - script: echo "Spring build completed."
-            displayName: 'Spring Build Completed'
+          - script: ls
+            displayName: 'Filepath'
 
       - job: BuildDockerImage
         displayName: Build Docker Image
