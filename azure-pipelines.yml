@@ -47,6 +47,7 @@ stages:
               dockerfile: $(dockerfilePath)
               containerRegistry: $(dockerRegistryServiceConnection)
               tags: $(tag)
+              ports: '8080'
 
 
   - stage: Deploying
