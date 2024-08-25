@@ -49,6 +49,15 @@ stages:
               tags: $(tag)
               ports: '8080'
 
+          - task: AzureContainerInstancesTask@1
+            inputs:
+              azureSubscription: 'a8e7096d-ac5d-400c-8ef4-b266d644b821'
+              resourceGroup: 'nd-aks-snd-rg'
+              containerGroupName: '<Your container group name>'
+              image: '$(containerRegistry)/$(imageRepository):$(tag)'
+              ports: '80 8080'
+              # This maps external port 80 to container port 8080
+
 
   - stage: Deploying
     displayName: Deploying to EC2
