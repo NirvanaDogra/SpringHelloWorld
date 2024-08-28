@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-hello-world-development
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-hello-world-development-label
+  template:
+    metadata:
+      labels:
+        app: spring-hello-world-development-label
+    spec:
+      containers:
+        - name: spring-hello-world-container
+          image: ndacrsnd.azurecr.io/springhelloworld:latest
+          ports:
+            - containerPort: 8080
+      imagePullSecrets:
+        - name: acr-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-hello-world-service
+spec:
+  selector:
+    app: spring-hello-world-development-label
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
